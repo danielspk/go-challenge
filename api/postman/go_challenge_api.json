@@ -1,0 +1,243 @@
+{
+	"info": {
+		"_postman_id": "51c441db-e373-45a4-9b68-66b0456da273",
+		"name": "Go Challenge",
+		"description": "Definición de la API del *Go Challenge*",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API RESTful",
+			"item": [
+				{
+					"name": "Offices",
+					"item": [
+						{
+							"name": "Find Office",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/api/v1/offices/1",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"offices",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Save Office",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"address\": \"El Salvador 5700 - CABA\",\n    \"latitude\": -34.582375,\n    \"longitude\": -58.436463\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{host}}/api/v1/offices",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"offices"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "RPC",
+			"item": [
+				{
+					"name": "Searches",
+					"item": [
+						{
+							"name": "Office by Proximity",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{host}}/rpc/v1/searches/officeByProximity?latitude=-34.551474&longitude=-58.461387",
+									"host": [
+										"{{host}}"
+									],
+									"path": [
+										"rpc",
+										"v1",
+										"searches",
+										"officeByProximity"
+									],
+									"query": [
+										{
+											"key": "latitude",
+											"value": "-34.551474"
+										},
+										{
+											"key": "longitude",
+											"value": "-58.461387"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "Systems",
+					"item": [
+						{
+							"name": "Health Checks",
+							"item": [
+								{
+									"name": "Database PING",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{host}}/rpc/v1/systems/health-checks/database/ping",
+											"host": [
+												"{{host}}"
+											],
+											"path": [
+												"rpc",
+												"v1",
+												"systems",
+												"health-checks",
+												"database",
+												"ping"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Servicios Externos",
+			"item": [
+				{
+					"name": "GraphHopper",
+					"item": [
+						{
+							"name": "Calcular Ruta",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{graphhopper_host}}?point=-34.622678,-58.478349&point=-34.611839,-58.454481&vehicle=car&locale=es&calc_points=false&key={{graphhopper_api_key}}",
+									"host": [
+										"{{graphhopper_host}}"
+									],
+									"query": [
+										{
+											"key": "point",
+											"value": "-34.622678,-58.478349"
+										},
+										{
+											"key": "point",
+											"value": "-34.611839,-58.454481"
+										},
+										{
+											"key": "vehicle",
+											"value": "car"
+										},
+										{
+											"key": "locale",
+											"value": "es"
+										},
+										{
+											"key": "calc_points",
+											"value": "false"
+										},
+										{
+											"key": "key",
+											"value": "{{graphhopper_api_key}}"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "bbd30d57-a503-4836-b758-3d3366cef227",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "c2f719dd-4d01-4bd1-93c6-f50aee49b7b7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "d9c760a8-29d5-4b91-af93-be1c9ee23d6a",
+			"key": "host",
+			"value": "http://127.0.0.1:8000"
+		},
+		{
+			"id": "58eb0b68-f5ea-4292-9038-b7a09aba8b03",
+			"key": "graphhopper_host",
+			"value": "https://graphhopper.com/api/1/route"
+		},
+		{
+			"id": "85403f74-98a8-40d1-b874-e9cf92b1a69d",
+			"key": "graphhopper_api_key",
+			"value": "79d8f89f-aee7-4b0c-be92-0170aee182e9"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

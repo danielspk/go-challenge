@@ -1,0 +1,20 @@
+# Nota: Este archivo no contiene exclusiones propias de sistemas operativos o configuraciones de IDEs.
+#       Dichas exclusiones deben formar parte del `.gitignore` global de los equipos de trabajo del team core.
+
+# binarios de aplicación
+build/
+
+# configuración de ambiente
+deployments/.env
+
+# datos de volúmenes Docker
+deployments/data/
+
+# logs de aplicación
+storage/logs/*.log
+
+# temporales
+tmp/
+
+# paquetes de terceros
+vendor/

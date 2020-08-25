@@ -1,0 +1,36 @@
+version: "3.8"
+services:
+  mysql:
+    container_name: "challenge_mysql"
+    image: "mysql:8.0"
+    ports:
+      - "33066:3306"
+    volumes:
+      - ./data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: ${DATABASE_NAME}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+    networks:
+      - challengenet
+  api:
+    container_name: "challenge_api"
+    build:
+      context: ..
+      dockerfile: deployments/Dockerfile
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mysql
+    environment:
+      WAIT_HOSTS: mysql:3306
+      DATABASE_USER: ${DATABASE_USER}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_HOST_PORT: ${DATABASE_HOST_PORT}
+      DATABASE_NAME: ${DATABASE_NAME}
+      GRAPHHOPPER_APY_KEY: ${GRAPHHOPPER_APY_KEY}
+    networks:
+      - challengenet
+networks:
+  challengenet:
