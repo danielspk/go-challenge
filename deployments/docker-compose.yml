@@ -19,12 +19,15 @@ services:
     build:
       context: ..
       dockerfile: deployments/Dockerfile
+      args:
+        API_PORT: ${API_PORT}
     ports:
-      - "8000:8000"
+      - ${API_PORT}:${API_PORT}
     depends_on:
       - mysql
     environment:
       WAIT_HOSTS: mysql:3306
+      API_PORT: ${API_PORT}
       DATABASE_USER: ${DATABASE_USER}
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
       DATABASE_HOST_PORT: ${DATABASE_HOST_PORT}

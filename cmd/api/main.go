@@ -10,6 +10,7 @@ import (
 	"go.uber.org/zap"
 	"log"
 	"os"
+	"strconv"
 	"time"
 )
 
@@ -34,7 +35,7 @@ func main() {
 
 // validateEnv valida la presencia de las variables de entorno requeridas
 func validateEnv() {
-	envs := []string{"DATABASE_USER", "DATABASE_PASSWORD", "DATABASE_HOST_PORT", "DATABASE_NAME", "GRAPHHOPPER_APY_KEY"}
+	envs := []string{"API_PORT", "DATABASE_USER", "DATABASE_PASSWORD", "DATABASE_HOST_PORT", "DATABASE_NAME", "GRAPHHOPPER_APY_KEY"}
 
 	for _, envKey := range envs {
 		_, exists := os.LookupEnv(envKey)
@@ -96,9 +97,15 @@ func runStatsDatabase(database *persistence.Client, logger *zap.Logger) {
 
 // runServer ejecuta el web server de la API
 func runServer(container *infrastructure.Container) {
-	server := api.Factory(container)
+	port, err := strconv.ParseUint(os.Getenv("API_PORT"), 10, 16)
 
-	err := server.ListenAndServe()
+	if err != nil {
+		log.Fatalf("Main Error: %s", err.Error())
+	}
+
+	server := api.Factory(uint16(port), container)
+
+	err = server.ListenAndServe()
 
 	if err != nil {
 		log.Fatalf("Main Error: %s", err.Error())

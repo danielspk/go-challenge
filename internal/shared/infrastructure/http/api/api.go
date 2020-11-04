@@ -9,7 +9,7 @@ import (
 )
 
 // Factory factoría para crear el web server de la API
-func Factory(container *infrastructure.Container) *Server {
+func Factory(port uint16, container *infrastructure.Container) *Server {
 	apiHandlers := &Handlers{
 		Office:   office.NewOfficeHandlerFactory(container),
 		Search:   search.NewSearchHandlerFactory(container),
@@ -17,7 +17,7 @@ func Factory(container *infrastructure.Container) *Server {
 	}
 
 	router := NewRouter(apiHandlers)
-	server := NewServer(8000, router)
+	server := NewServer(port, router)
 
 	log.Println("go challenge API is running")
 

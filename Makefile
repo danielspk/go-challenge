@@ -21,8 +21,8 @@ go-test:
 go-build: go-clear
 	go build -o ${BINARY_OUTPUT} ${GO_APP}
 
-go-build-prod: go-clear go-test go-fmt
-	go build -ldflags "-s -w" -o ${BINARY_OUTPUT} ${GO_APP}
+go-build-prod: go-clear go-fmt
+	CGO_ENABLED=0 go build -a -ldflags "-s -w" -o ${BINARY_OUTPUT} ${GO_APP}
 
 docker-build:
 	docker-compose -f ./deployments/docker-compose.yml build
